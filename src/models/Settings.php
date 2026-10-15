@@ -20,6 +20,11 @@ class Settings extends Model
     public ?string $sourceToken = null;
 
 	/**
+     * @var string the ingest host for Better Stack
+     */
+    public ?string $ingestUrl = "https://in.logs.betterstack.com";
+
+	/**
 	 * @var array
 	 */
 	public array $levels = ['error', 'warning'];

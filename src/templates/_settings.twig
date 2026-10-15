@@ -15,6 +15,17 @@
     first: true
 }) }}
 
+{{ forms.autosuggestfield({
+    label: 'Ingest Host Url',
+    id: 'ingestUrl',
+    name: 'ingestUrl',
+    suggestEnvVars: false,
+    required: true,
+    value: settings['ingestUrl'],
+    warning: self.configWarning('ingestUrl', 'better-stack-logger'),
+    first: true
+}) }}
+
 {{ forms.lightswitchField({
     label:        "Enabled",
     id:           'enabled',

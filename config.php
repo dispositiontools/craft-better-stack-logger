@@ -26,6 +26,7 @@ return [
 	'*' => [
 		'enabled' => false,
 		'sourceToken' => App::env('BETTERSTACK_SOURCE_TOKEN'),
+		'ingestUrl' => App::env('BETTERSTACK_INGEST_URL'),
 		'levels' => ['error', 'warning'],
 		'logVars' => [],
 		'exceptCodes' => [403, 404],

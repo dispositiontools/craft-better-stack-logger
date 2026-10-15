@@ -38,6 +38,7 @@ class BetterStackTarget extends \yii\log\Target
 		$this->exceptCodes = $settings->exceptCodes;
 		$this->setLevels($settings->levels);
 		$this->logVars = $settings->logVars;
+		$this->ingestUrl = $settings->ingestUrl;
 	}
 
 	// Customize the method to format and send logs to BetterStack
@@ -71,12 +72,12 @@ class BetterStackTarget extends \yii\log\Target
 
 			// Send each log message to BetterStack here
 			if (!$bail) {
-				$this->sendToBetterStack($message, $this->sourceToken);
+				$this->sendToBetterStack($message, $this->sourceToken, $this->ingestUrl);
 			}
 		}
     }
 
-    protected function sendToBetterStack($message, $sourceToken)
+    protected function sendToBetterStack($message, $sourceToken, $ingestUrl = "https://in.logs.betterstack.com")
     {
 	    [$text, $level, $category, $timestamp] = $message;
 		$data = json_encode([
@@ -92,7 +93,7 @@ class BetterStackTarget extends \yii\log\Target
 		    "Authorization: Bearer " . $sourceToken,
 	    ];
 
-	    \curl_setopt($handle, CURLOPT_URL, "https://in.logs.betterstack.com");
+	    \curl_setopt($handle, CURLOPT_URL, $ingestUrl );
 	    \curl_setopt($handle, CURLOPT_POST, true);
 	    \curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
 	    \curl_setopt($handle, CURLOPT_CONNECTTIMEOUT_MS, 5000);
